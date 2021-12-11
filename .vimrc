@@ -7,28 +7,32 @@ endif
 
 " initialize vim-plug
 call plug#begin()
-    
+
     " sidebar navigation
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
     " Plug 'tpope/vim-sensible'
 
     " Python flake8
-    Plug 'nvie/vim-flake8'
+    Plug 'nvie/vim-flake8', { 'for': 'python' }
 
     " Plug 'mhinz/vim-startify'
 
     " some 'pretty' theme
-    Plug 'ErichDonGubler/vim-sublime-monokai'
+    " Plug 'ErichDonGubler/vim-sublime-monokai'
 
     " for block commenting
     Plug 'scrooloose/nerdcommenter'
 
     " ?
     Plug 'tpope/vim-obsession'
-    
-    " jedi-vim for autocompletion
-    Plug 'davidhalter/jedi-vim'
+
+    if !has('nvim')
+        " jedi-vim for autocompletion
+        Plug 'davidhalter/jedi-vim'
+    else
+        Plug 'deoplete-plugins/deoplete-jedi'
+    endif
 
     " vim-session
     Plug 'xolox/vim-session'
@@ -40,8 +44,30 @@ call plug#begin()
     Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
     " airline
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    " Plug 'vim-airline/vim-airline'
+    " Plug 'vim-airline/vim-airline-themes'
+
+    " vim-mypy
+    " Plug 'integralist/vim-mypy'
+    Plug 'flebel/vim-mypy', { 'for': 'python', 'branch': 'bugfix/fast_parser_is_default_and_only_parser' }
+
+    " vim-markdonw
+    Plug 'tpope/vim-markdown'
+
+    " Plug 'nathanaelkane/vim-indent-guides'
+
+    if has('nvim')
+        Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    endif
+
+    " multicursor support (similar to ctrl+d in sublime)
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+    Plug 'tpope/vim-eunuch'
+
+    Plug 'Yggdroot/indentLine'
+
+    Plug 'ErichDonGubler/vim-sublime-monokai'
 
 call plug#end()
 
@@ -66,5 +92,41 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Use Enter to create empty spaces
+" nmap <S-Enter> O<Esc>
+" nmap <CR> o<Esc>
+
+
+"if !has('nvim')
+    ":color desert
+"endif
+
 " Required by nercommenter
 filetype plugin on
+
+" For better identation
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
+
+let g:indent_guides_enable_on_vim_startup = 1
+" better splitting
+set splitbelow
+set splitright
+
+if !has('nvim')
+    if has("autocmd")
+      au BufNewFile,BufRead *.nml set filetype=fortran
+      au BufNewFile,BufRead *.namelist set filetype=fortran
+    endif
+endif
+
+" sublime monokai
+syntax on
+colorscheme sublimemonokai
+
+"set termguicolors
