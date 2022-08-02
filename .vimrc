@@ -1,3 +1,4 @@
+" https://neovim.io/doc/user/nvim.html#nvim-from-vim
 " bootstrap vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -11,6 +12,9 @@ call plug#begin()
     " sidebar navigation
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
+
+    Plug 'lervag/vimtex'
+
     " Plug 'tpope/vim-sensible'
 
     " Python flake8
@@ -19,10 +23,13 @@ call plug#begin()
     " Plug 'mhinz/vim-startify'
 
     " some 'pretty' theme
-    " Plug 'ErichDonGubler/vim-sublime-monokai'
+    Plug 'ErichDonGubler/vim-sublime-monokai'
 
     " for block commenting
-    Plug 'scrooloose/nerdcommenter'
+    " Plug 'scrooloose/nerdcommenter'
+
+    " easier commenting than nerdcommenter
+    Plug 'tpope/vim-commentary'
 
     " ?
     Plug 'tpope/vim-obsession'
@@ -49,25 +56,28 @@ call plug#begin()
 
     " vim-mypy
     " Plug 'integralist/vim-mypy'
-    Plug 'flebel/vim-mypy', { 'for': 'python', 'branch': 'bugfix/fast_parser_is_default_and_only_parser' }
+    "Plug 'flebel/vim-mypy', { 'for': 'python', 'branch': 'bugfix/fast_parser_is_default_and_only_parser' }
 
     " vim-markdonw
     Plug 'tpope/vim-markdown'
 
     " Plug 'nathanaelkane/vim-indent-guides'
 
-    if has('nvim')
-        Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-    endif
+    " if has('nvim')
+    "    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    " endif
 
     " multicursor support (similar to ctrl+d in sublime)
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
     Plug 'tpope/vim-eunuch'
 
-    Plug 'Yggdroot/indentLine'
+    "Plug 'Yggdroot/indentLine'
 
-    Plug 'ErichDonGubler/vim-sublime-monokai'
+    " Plug 'ErichDonGubler/vim-sublime-monokai'
+
+    " better monokai
+    Plug 'patstockwell/vim-monokai-tasty'
 
 call plug#end()
 
@@ -125,8 +135,47 @@ if !has('nvim')
     endif
 endif
 
+let g:vim_monokai_tasty_italic = 1
+colorscheme vim-monokai-tasty
+let g:lightline = {
+      \ 'colorscheme': 'monokai_tasty',
+      \ }
+let g:airline_theme='monokai_tasty'
+
 " sublime monokai
-syntax on
-colorscheme sublimemonokai
+" syntax on
+" colorscheme sublimemonokai
 
 "set termguicolors
+nmap <C-P> :FZF<CR>
+
+
+"  Latex plugin options
+
+" This is necessary for VimTeX to load properly. The "indent" is optional.
+" Note that most plugin managers will do this automatically.
+filetype plugin indent on
+
+" This enables Vim's and neovim's syntax-related features. Without this, some
+" VimTeX features will not work (see ":help vimtex-requirements" for more
+" info).
+syntax enable
+
+" Viewer options: One may configure the viewer either by specifying a built-in
+" viewer method:
+" let g:vimtex_view_method = 'okular'
+
+" Or with a generic interface:
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
+" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+" strongly recommended, you probably don't need to configure anything. If you
+" want another compiler backend, you can change it as follows. The list of
+" supported backends and further explanation is provided in the documentation,
+" see ":help vimtex-compiler".
+" let g:vimtex_compiler_method = 'latexrun'
+
+" Most VimTeX mappings rely on localleader and this can be changed with the
+" following line. The default is usually fine and is the symbol "\".
+" let maplocalleader = ","
