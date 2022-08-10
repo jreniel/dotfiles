@@ -8,6 +8,9 @@ endif
 
 " initialize vim-plug
 call plug#begin()
+       
+    " shows identation as a mark
+    Plug 'Yggdroot/indentLine'
 
     Plug 'thaerkh/vim-workspace'
 
@@ -187,3 +190,8 @@ let g:workspace_autocreate = 1
 nnoremap <leader>s :ToggleWorkspace<CR>
 
 " let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+
+
+" Yggdroot/indentLine
+let g:indentLine_leadingSpaceChar='·'
+let g:indentLine_leadingSpaceEnabled='1'
