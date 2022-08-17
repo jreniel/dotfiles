@@ -8,7 +8,19 @@ endif
 
 " initialize vim-plug
 call plug#begin()
-       
+
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
+
+
+    " (python) syntax check
+    Plug 'w0rp/ale'
+
+    Plug 'vim-python/python-syntax'
+
+    Plug 'lifepillar/vim-gruvbox8'
+
     " shows identation as a mark
     Plug 'Yggdroot/indentLine'
 
@@ -195,3 +207,26 @@ nnoremap <leader>s :ToggleWorkspace<CR>
 " Yggdroot/indentLine
 let g:indentLine_leadingSpaceChar='·'
 let g:indentLine_leadingSpaceEnabled='1'
+
+" vim-python/python-syntax
+let g:python_highlight_all = 1
+
+
+" w0rp/ale (python) syntax-check
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_linters = {'python': ['flake8']}
+
+
+" Airline
+let g:airline_left_sep  = ''
+let g:airline_right_sep = ''
+let g:airline#extensions#ale#enabled = 1
+let airline#extensions#ale#error_symbol = 'E:'
+let airline#extensions#ale#warning_symbol = 'W:'
+
+
+set nowrap
