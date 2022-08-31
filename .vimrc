@@ -9,6 +9,15 @@ endif
 " initialize vim-plug
 call plug#begin()
 
+    " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+
+    " Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+
+    Plug 'junegunn/limelight.vim'
+    Plug 'junegunn/goyo.vim'
+
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
@@ -49,7 +58,7 @@ call plug#begin()
     Plug 'tpope/vim-commentary'
 
     " ?
-    Plug 'tpope/vim-obsession'
+    " Plug 'tpope/vim-obsession'
 
     if !has('nvim')
         " jedi-vim for autocompletion
@@ -191,7 +200,7 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " want another compiler backend, you can change it as follows. The list of
 " supported backends and further explanation is provided in the documentation,
 " see ":help vimtex-compiler".
-" let g:vimtex_compiler_method = 'latexrun'
+" let g:vimtex_compiler_method = 'latexmk'
 
 " Most VimTeX mappings rely on localleader and this can be changed with the
 " following line. The default is usually fine and is the symbol "\".
@@ -201,7 +210,7 @@ let g:workspace_autocreate = 1
 
 nnoremap <leader>s :ToggleWorkspace<CR>
 
-" let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 
 
 " Yggdroot/indentLine
@@ -230,3 +239,14 @@ let airline#extensions#ale#warning_symbol = 'W:'
 
 
 set nowrap
+
+
+" normal/insert
+" <Plug>MarkdownPreview
+" <Plug>MarkdownPreviewStop
+" <Plug>MarkdownPreviewToggle
+let g:mkdp_auto_start = 1
+" example
+" nmap <C-s> <Plug>MarkdownPreview
+" nmap <M-s> <Plug>MarkdownPreviewStop
+" nmap <C-p> <Plug>MarkdownPreviewToggle
