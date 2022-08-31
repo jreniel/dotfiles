@@ -8,6 +8,7 @@ endif
 
 set rtp+=~/.fzf
 
+
 " initialize vim-plug
 call plug#begin()
 
