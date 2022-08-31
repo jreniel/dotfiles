@@ -6,6 +6,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
 endif
 
+set rtp+=~/.fzf
+
 " initialize vim-plug
 call plug#begin()
 
