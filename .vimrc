@@ -108,6 +108,10 @@ call plug#begin()
     " better monokai
     Plug 'patstockwell/vim-monokai-tasty'
 
+    Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
+
+    Plug 'yangye1098/vim-ipynb'
+
 call plug#end()
 
 " Toggle NerdTree view using F6
