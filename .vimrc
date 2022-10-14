@@ -7,7 +7,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 set rtp+=~/.fzf
-
+set rtp+=~/.miniconda3/bin
+let g:python3_host_prog = '~/.miniconda3/bin/python3'
 
 " initialize vim-plug
 call plug#begin()
@@ -24,7 +25,8 @@ call plug#begin()
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
-
+    "
+    " Plug 'vim-scripts/CD'
 
     " (python) syntax check
     Plug 'w0rp/ale'
@@ -92,9 +94,10 @@ call plug#begin()
 
     " Plug 'nathanaelkane/vim-indent-guides'
 
-    " if has('nvim')
-    "    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-    " endif
+    if has('nvim')
+       " syntax highlighting
+       Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    endif
 
     " multicursor support (similar to ctrl+d in sublime)
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -110,7 +113,7 @@ call plug#begin()
 
     Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
 
-    Plug 'yangye1098/vim-ipynb'
+    " Plug 'yangye1098/vim-ipynb'
 
 call plug#end()
 
@@ -252,8 +255,21 @@ set nowrap
 " <Plug>MarkdownPreview
 " <Plug>MarkdownPreviewStop
 " <Plug>MarkdownPreviewToggle
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 " example
 " nmap <C-s> <Plug>MarkdownPreview
 " nmap <M-s> <Plug>MarkdownPreviewStop
 " nmap <C-p> <Plug>MarkdownPreviewToggle
+"
+"
+"
+" magma
+nnoremap <silent><expr> <LocalLeader>r  :MagmaEvaluateOperator<CR>
+nnoremap <silent>       <LocalLeader>rr :MagmaEvaluateLine<CR>
+xnoremap <silent>       <LocalLeader>r  :<C-u>MagmaEvaluateVisual<CR>
+nnoremap <silent>       <LocalLeader>rc :MagmaReevaluateCell<CR>
+nnoremap <silent>       <LocalLeader>rd :MagmaDelete<CR>
+nnoremap <silent>       <LocalLeader>ro :MagmaShowOutput<CR>
+
+let g:magma_automatically_open_output = v:false
+let g:magma_image_provider = "ueberzug"
