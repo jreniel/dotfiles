@@ -1,2 +1,2 @@
-require("jrcalzada.core.set")
-require("jrcalzada.core.remap")
+require("jrcalzada.core.options")
+require("jrcalzada.core.keymap")

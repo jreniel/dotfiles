@@ -88,6 +88,15 @@ return {
       on_attach = on_attach,
     })
 
+    -- configure Rust server
+    -- lspconfig["rust_analyzer"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = {"rust"},
+    --   root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+    --   -- settings = {
+    --   --       }
+    -- })
     -- configure tailwindcss server
     lspconfig["tailwindcss"].setup({
       capabilities = capabilities,
