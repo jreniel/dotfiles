@@ -12,7 +12,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(
-{{ import = "jrcalzada.plugins" }, { import = "jrcalzada.plugins.lsp" }},
+{
+    { import = "jrcalzada.plugins" },
+    -- { import = "jrcalzada.plugins.lsp" }
+},
 {
   install = {
     colorscheme = { "vim-monokai-tasty" },
