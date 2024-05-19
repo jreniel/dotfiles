@@ -1,4 +1,3 @@
-"
 " https://neovim.io/doc/user/nvim.html#nvim-from-vim
 " bootstrap vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -8,92 +7,54 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 set rtp+=~/.fzf
+" if executable('python3') == 0
 set rtp+=~/.miniconda3/bin
-let g:python3_host_prog = '~/.miniconda3/bin/python'
+let g:python3_host_prog = '~/.miniconda3/bin/python3'
+" endif
 
 " initialize vim-plug
 call plug#begin()
-
-    " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-    "
-    Plug 'mbbill/undotree'
-
-    " Plug 'github/copilot.vim'
-
-    " Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
+    Plug 'ErichDonGubler/vim-sublime-monokai'
+    Plug 'Yggdroot/indentLine'
+    Plug 'dense-analysis/ale'
+    Plug 'edluffy/hologram.nvim'
+    Plug 'github/copilot.vim', {'branch': 'release'}
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-
-    Plug 'junegunn/limelight.vim'
     Plug 'junegunn/goyo.vim'
-
+    Plug 'junegunn/limelight.vim'
+    Plug 'kamykn/spelunker.vim'
+    Plug 'lervag/vimtex'
+    Plug 'lifepillar/vim-gruvbox8'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'nvie/vim-flake8', { 'for': 'python' }
+    Plug 'rust-lang/rust.vim'
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+    Plug 'thaerkh/vim-workspace'
+    Plug 'tpope/vim-commentary'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-
-    "
-    " Plug 'vim-scripts/CD'
-    " Plug 'rudrab/vimf90'
-
-    " (python) syntax check
-    Plug 'w0rp/ale'
-
     Plug 'vim-python/python-syntax'
-
-    Plug 'lifepillar/vim-gruvbox8'
-
-    " shows identation as a mark
-    Plug 'Yggdroot/indentLine'
-
-    Plug 'thaerkh/vim-workspace'
-
-    " sidebar navigation
-    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-
-
-    Plug 'lervag/vimtex'
-
-    " Plug 'tpope/vim-sensible'
-
-    " Python flake8
-    Plug 'nvie/vim-flake8', { 'for': 'python' }
-
-    " Plug 'mhinz/vim-startify'
-
-    " some 'pretty' theme
-    Plug 'ErichDonGubler/vim-sublime-monokai'
-
-    " for block commenting
-    " Plug 'scrooloose/nerdcommenter'
-
-
-    " Plug 'neovim/nvim-lspconfig'
-    " Plug 'simrat39/rust-tools.nvim'
-
-    "
-    " Use release branch (recommend)
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-    " easier commenting than nerdcommenter
-    Plug 'tpope/vim-commentary'
-
-    " ?
-    " Plug 'tpope/vim-obsession'
-
+    Plug 'w0rp/ale'
+    Plug 'kamykn/popup-menu.nvim'
+    Plug 'mbbill/undotree'
+    Plug 'leafgarland/typescript-vim'
     if !has('nvim')
-        " jedi-vim for autocompletion
         Plug 'davidhalter/jedi-vim'
     else
         Plug 'deoplete-plugins/deoplete-jedi'
     endif
-
+    " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    " Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
+    " Plug 'vim-scripts/CD'
+    " Plug 'tpope/vim-sensible'
+    " Plug 'mhinz/vim-startify'
+    " ?
+    " Plug 'tpope/vim-obsession'
     " vim-session
     Plug 'xolox/vim-session'
-
-    " vim-misc required by vim-session
     Plug 'xolox/vim-misc'
-
     " Relative line numberng
     Plug 'jeffkreeftmeijer/vim-numbertoggle'
-
     " airline
     " Plug 'vim-airline/vim-airline'
     " Plug 'vim-airline/vim-airline-themes'
@@ -135,6 +96,8 @@ nmap <F6> :NERDTreeToggle<CR>
 
 " Toggle mouse support using F3
 map <F3> <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
+
+set nospell
 
 " shut up vim-obsession (I think)
 let g:session_autosave = 'no'
@@ -263,6 +226,7 @@ let airline#extensions#ale#warning_symbol = 'W:'
 
 set nowrap
 
+let g:enable_spelunker_vim = 0
 
 " normal/insert
 " <Plug>MarkdownPreview
@@ -287,24 +251,9 @@ nnoremap <silent>       <LocalLeader>ro :MagmaShowOutput<CR>
 let g:magma_automatically_open_output = v:false
 let g:magma_image_provider = "ueberzug"
 
-" let g:fprettify_options = '--silent'
-" let g:ale_enabled = 0
 
-" autocmd Filetype fortran setlocal formatprg=fprettify\ --silent
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
 
-" let g:coc_start_at_startup = 0
-" augroup coc
-"   autocmd!
-"   autocmd VimEnter * :silent CocStart
-" augroup end
-" let g:coc_user_config = {
-"       \   'languageserver': {
-"       \     'fortran': {
-"       \       'command': '~/.local/bin/fortls',
-"       \       'args': ['--lowercase_intrinsics'],
-"       \       'filetypes': ['fortran'],
-"       \       'rootPatterns': ['.fortls', '.git/'],
-"       \     }
-"       \ }
-"       \ }
-" let fortran_linter = -1
+inoremap <silent><expr> <TAB>
