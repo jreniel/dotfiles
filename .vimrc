@@ -1,3 +1,4 @@
+"
 " https://neovim.io/doc/user/nvim.html#nvim-from-vim
 " bootstrap vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -8,13 +9,16 @@ endif
 
 set rtp+=~/.fzf
 set rtp+=~/.miniconda3/bin
-let g:python3_host_prog = '~/.miniconda3/bin/python3'
+let g:python3_host_prog = '~/.miniconda3/bin/python'
 
 " initialize vim-plug
 call plug#begin()
 
     " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    "
+    Plug 'mbbill/undotree'
 
+    " Plug 'github/copilot.vim'
 
     " Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
@@ -27,6 +31,7 @@ call plug#begin()
 
     "
     " Plug 'vim-scripts/CD'
+    " Plug 'rudrab/vimf90'
 
     " (python) syntax check
     Plug 'w0rp/ale'
@@ -58,6 +63,14 @@ call plug#begin()
 
     " for block commenting
     " Plug 'scrooloose/nerdcommenter'
+
+
+    " Plug 'neovim/nvim-lspconfig'
+    " Plug 'simrat39/rust-tools.nvim'
+
+    "
+    " Use release branch (recommend)
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " easier commenting than nerdcommenter
     Plug 'tpope/vim-commentary'
@@ -202,7 +215,7 @@ syntax enable
 " let g:vimtex_view_method = 'okular'
 
 " Or with a generic interface:
-let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 
 " VimTeX uses latexmk as the default compiler backend. If you use it, which is
@@ -273,3 +286,25 @@ nnoremap <silent>       <LocalLeader>ro :MagmaShowOutput<CR>
 
 let g:magma_automatically_open_output = v:false
 let g:magma_image_provider = "ueberzug"
+
+" let g:fprettify_options = '--silent'
+" let g:ale_enabled = 0
+
+" autocmd Filetype fortran setlocal formatprg=fprettify\ --silent
+
+" let g:coc_start_at_startup = 0
+" augroup coc
+"   autocmd!
+"   autocmd VimEnter * :silent CocStart
+" augroup end
+" let g:coc_user_config = {
+"       \   'languageserver': {
+"       \     'fortran': {
+"       \       'command': '~/.local/bin/fortls',
+"       \       'args': ['--lowercase_intrinsics'],
+"       \       'filetypes': ['fortran'],
+"       \       'rootPatterns': ['.fortls', '.git/'],
+"       \     }
+"       \ }
+"       \ }
+" let fortran_linter = -1

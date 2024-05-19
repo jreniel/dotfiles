@@ -1,3 +1,3 @@
 return {
-    "numirias/semshi",
+    "wookayin/semshi",
 }
