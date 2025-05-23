@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/typst-preview.lua
 return {
 	"chomosuke/typst-preview.nvim",
 	lazy = false, -- or ft = 'typst'

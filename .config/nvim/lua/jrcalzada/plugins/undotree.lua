@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/undotree.lua
 return {
 	"jiaoshijie/undotree",
 	dependencies = "nvim-lua/plenary.nvim",

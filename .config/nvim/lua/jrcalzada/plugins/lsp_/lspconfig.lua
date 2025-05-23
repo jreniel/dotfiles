@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/lsp_/lspconfig.lua
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },

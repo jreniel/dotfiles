@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/vimtex.lua
 return {
 	"lervag/vimtex",
 	init = function()

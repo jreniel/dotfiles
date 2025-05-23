@@ -1,3 +1,4 @@
+-- lua/jrcalzada/core/options.lua
 local opt = vim.opt
 
 -- opt.guicursor = ""

@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/nvim-config-local.lua
 return {
 	"klen/nvim-config-local",
 	config = function()

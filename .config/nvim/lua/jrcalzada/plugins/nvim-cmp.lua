@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/nvim-cmp.lua
 return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",

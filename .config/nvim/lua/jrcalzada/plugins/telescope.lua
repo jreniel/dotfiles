@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/telescope.lua
 return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",

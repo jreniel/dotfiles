@@ -1,3 +1,4 @@
+-- lua/jrcalzada/core/keymap.lua
 local keymap = vim.keymap
 
 -- Toggle mouse with F3

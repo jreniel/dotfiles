@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/nvim-treesitter.lua
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",

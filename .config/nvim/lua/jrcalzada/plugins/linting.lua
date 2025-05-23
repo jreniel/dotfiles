@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/linting.lua
 return {
   "mfussenegger/nvim-lint",
   lazy = true,

@@ -1,3 +1,4 @@
+-- lua/jrcalzada/core/cmd.lua
 local cmd = vim.cmd
 
 -- Resolves :E ambiguity

@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/autosave.lua
 return {
   '0x00-ketsu/autosave.nvim',
   -- lazy-loading on events

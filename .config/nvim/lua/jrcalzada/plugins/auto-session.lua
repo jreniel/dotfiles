@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/auto-session.lua
 return {
   'rmagatti/auto-session',
   config = function()

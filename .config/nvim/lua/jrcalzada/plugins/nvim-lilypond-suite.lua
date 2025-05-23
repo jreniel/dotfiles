@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/nvim-lilypond-suite.lua
 return {
 	"martineausimon/nvim-lilypond-suite",
 	config = function()

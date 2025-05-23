@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/lsp_/none-ls.lua
 return {
   "nvimtools/none-ls.nvim", -- configure formatters & linters
   lazy = true,

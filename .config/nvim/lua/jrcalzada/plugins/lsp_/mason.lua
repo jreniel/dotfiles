@@ -1,3 +1,4 @@
+-- lua/jrcalzada/plugins/lsp_/mason.lua
 return {
   "williamboman/mason.nvim",
   dependencies = {
