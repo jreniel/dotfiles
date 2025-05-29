@@ -26,7 +26,7 @@ return {
     
     -- Create a BufWritePre hook to prevent on-save formatting during undo
     vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = {"*.rs"},
+      pattern = {"*.rs", "*.java"},
       callback = function(args)
         -- If we're in an undo operation, temporarily disable format on save
         if in_undo_operation then
@@ -66,7 +66,8 @@ return {
         graphql = { "prettier" },
         lua = { "stylua" },
         python = { "isort", "black" },
-        rust = { "rustfmt" }, -- Keep rustfmt enabled
+        rust = { "rustfmt" },
+        java = { "google-java-format" }, -- Java formatting
       },
       format_on_save = {
         lsp_fallback = true,

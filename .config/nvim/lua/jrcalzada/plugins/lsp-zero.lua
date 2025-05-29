@@ -12,8 +12,6 @@ return {
 		{ "hrsh7th/nvim-cmp" }, -- Required
 		{ "hrsh7th/cmp-nvim-lsp" }, -- Required
 		{ "L3MON4D3/LuaSnip" }, -- Required
-		-- py_lsp
-		-- {'HallerPatrick/py_lsp.nvim'},
 	},
 	config = function()
 		local lsp_zero = require("lsp-zero")
@@ -21,79 +19,85 @@ return {
 		lsp_zero.extend_lspconfig()
 
 		lsp_zero.on_attach(function(client, bufnr)
-			-- see :help lsp-zero-keybindings
-			-- to learn the available actions
+			-- Default keymaps
 			lsp_zero.default_keymaps({ buffer = bufnr })
+			
+			-- Add your custom keymaps here
+			local opts = { noremap = true, silent = true, buffer = bufnr }
+			local keymap = vim.keymap
+
+			-- Custom keymaps (from your lspconfig.lua)
+			keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+			keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+			keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+			keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+			keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+			keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+			keymap.set("n", "K", vim.lsp.buf.hover, opts)
+			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 		end)
-		-- lsp_zero.setup_servers({'lua_ls', 'rust_analyzer'})
+
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
-			ensure_installed = {},
+			ensure_installed = {
+				"rust_analyzer",
+				"tsserver", 
+				"html",
+				"cssls",
+				"tailwindcss",
+				"svelte",
+				"lua_ls",
+				"graphql",
+				"emmet_ls",
+				"prismals",
+				"pyright",
+				-- Note: jdtls is handled separately by nvim-jdtls
+			},
+			automatic_installation = true,
 			handlers = {
+				-- Default handler
 				lsp_zero.default_setup,
+				
+				-- Lua specific setup
 				lua_ls = function()
 					local lua_opts = lsp_zero.nvim_lua_ls()
 					require("lspconfig").lua_ls.setup(lua_opts)
 				end,
+				
+				-- Skip rust_analyzer (handled by rustaceanvim)
 				rust_analyzer = function()
 					return true
-					-- require("lspconfig").rust_analyzer.setup({
-					-- 	cmd = {
-					-- 		"rustup",
-					-- 		"run",
-					-- 		"stable",
-					-- 		"rust-analyzer",
-					-- 	},
-					-- 	diagnostics = {
-					-- 		enable = false,
-					-- 	},
-					-- 	checkOnSave = {
-					-- 		allFeatures = true,
-					-- 		overrideCommand = {
-					-- 			"cargo",
-					-- 			"clippy",
-					-- 			"--workspace",
-					-- 			"--message-format=json",
-					-- 			"--all-targets",
-					-- 			"--all-features",
-					-- 		},
-					-- 	},
-					-- })
+				end,
+				
+				-- Skip jdtls (handled by nvim-jdtls)
+				jdtls = function()
+					return true
 				end,
 			},
 		})
 
+		-- Setup completion
 		local cmp = require("cmp")
 		local cmp_format = lsp_zero.cmp_format()
 
 		cmp.setup({
 			formatting = cmp_format,
 			mapping = cmp.mapping.preset.insert({
-				-- scroll up and down the documentation window
 				["<C-u>"] = cmp.mapping.scroll_docs(-4),
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
 			}),
 		})
 
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+		-- Diagnostic signs
+		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
-
-		-- require("py_lsp").setup()
-
-		--     local lsp = require('lsp-zero').preset({})
-
-		--     lsp.on_attach(function(client, bufnr)
-		--       -- see :help lsp-zero-keybindings
-		--       -- to learn the available actions
-		--       lsp.default_keymaps({buffer = bufnr})
-		--     end)
-
-		--     -- (Optional) Configure lua language server for neovim
-		--     require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
-
-		--     lsp.setup()
 	end,
 }
